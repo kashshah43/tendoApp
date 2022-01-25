@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,79 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+html,
+body,
+#root {
+  font: 0.9rem sans-serif;
+  /* background: #0a1f44; */
+  color: rgb(12, 43, 61);
+  height: 100%;
+  margin: 0;
+}
+
+.main-container {
+  /* background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.418)),
+    url("https://hdwallpaper20.com/wp-content/uploads/2017/07/wallpaper-wp4001752.jpg"); */
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.search {
+  outline: none;
+  padding: 10px 7%;
+  border-radius: 20px;
+  border: 1px solid rgb(251, 89, 156);
+  margin-bottom: 5%;
+  background: rgba(250, 250, 250, 0.85);
+  width: 100%;
+}
+
+.customForm {
+  width: 50%;
+}
+
+.centerAlign {
+  text-align: -webkit-center;
+}
+
+.submitBtn {
+  /* display: flex; */
+  -webkit-box-align: center;
+  align-items: center;
+  color: rgb(12, 43, 61);
+  background: linear-gradient(
+    121deg,
+    rgb(254, 91, 128) 0%,
+    rgb(251, 89, 156) 100%
+  );
+  border-radius: 24px;
+  padding: 5px 45px;
+  align-self: center;
+  border: none;
+  /* padding: 10px 7%; */
+  width: 10%;
+  text-align: center;
+  text-decoration: none;
+}
+
+.patientDisplayClass {
+  padding: 10px 0px;
+  font-size: 15px;
+}
+
+.patientDisplayClass b {
+  font-size: 16px;
+}
+
+.patientContainer .submitBtn {
+  font-size: 15px;
+  margin-left: 5px;
 }
