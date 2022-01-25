@@ -25,15 +25,17 @@ export default class SearchPatient extends Component {
                     <div className="form-group centerAlign">
                         <input 
                             type="tel"
-                            className="search"
+                            className="form-control"
+                            // className="search"
                             placeholder="Phone Number"
                             maxLength="10"
                             value={this.state.phone}
                             onChange={this.onChangePhone}
                         />
                     </div>
-                    <div className="form-group centerAlign">
-                        <Link className="submitBtn" to={"/details/"+this.state.phone}>Login</Link> 
+                    <br/>
+                    <div className="form-group">
+                        <Link className="btn btn-primary" to={"/details/"+this.state.phone}>Login</Link> 
                     </div>
                 </form>
             </div>

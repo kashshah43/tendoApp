@@ -37,8 +37,8 @@ export default class ViewAppointment extends Component {
                 status: res.data.status,
                 patientId: res.data.patient.fullName,
                 doctorId: res.data.doctor.givenName,
-                appointmentStart: res.data.appointmentStart,
-                appointmentEnd: res.data.appointmentEnd,
+                appointmentStart: Date(res.data.appointmentStart),
+                appointmentEnd: Date(res.data.appointmentEnd),
                 followUp: res.data.followUp,
             })
             axios.get('http://localhost:5000/diagnosis/'+res.data._id)
@@ -50,7 +50,7 @@ export default class ViewAppointment extends Component {
                     diagnosisName: resp.data.diagnosisName,
                     diagnosisCode: resp.data.diagnosisCode,
                     diagnosisSyatem: resp.data.diagnosisSyatem,
-                    lastUpdate: resp.data.lastUpdate
+                    lastUpdate: Date(resp.data.lastUpdate)
                 })
                 axios.get('http://localhost:5000/feedback/'+res.data._id)
                 .then(response => {
@@ -80,78 +80,109 @@ export default class ViewAppointment extends Component {
     render() {
         return (
             <div className="main-container patientContainer">
-                <h3>Appointments</h3>
-                <div className="patientDisplayClass">
-                    <b>Type: </b> {this.state.type}
-                </div>
-                <div className="patientDisplayClass">
-                    <b>Status: </b> {this.state.status}
-                </div>
-                <div className="patientDisplayClass">
-                    <b>Patient Name: </b> {this.state.patientId}
-                </div>
-                <div className="patientDisplayClass">
-                    <b>Doctor Name: </b> {this.state.doctorId}
-                </div>
-                <div className="patientDisplayClass">
-                    <b>AppointmentStart: </b> {this.state.appointmentStart}
-                </div>
-                <div className="patientDisplayClass">
-                    <b>AppointmentEnd: </b> {this.state.appointmentEnd}
-                </div>
-                <div className="patientDisplayClass">
-                    <b>FollowUp: </b> {this.state.followUp}
+                <div className="row">
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-header">
+                                <h3>Appointments</h3>
+                            </div>
+                            <div className="card-body">
+                                <div className="patientDisplayClass">
+                                    <b>Type: </b> {this.state.type}
+                                </div>
+                                <div className="patientDisplayClass">
+                                    <b>Status: </b> {this.state.status}
+                                </div>
+                                <div className="patientDisplayClass">
+                                    <b>Patient Name: </b> {this.state.patientId}
+                                </div>
+                                <div className="patientDisplayClass">
+                                    <b>Doctor Name: </b> {this.state.doctorId}
+                                </div>
+                                <div className="patientDisplayClass">
+                                    <b>AppointmentStart: </b> {this.state.appointmentStart}
+                                </div>
+                                <div className="patientDisplayClass">
+                                    <b>AppointmentEnd: </b> {this.state.appointmentEnd}
+                                </div>
+                                <div className="patientDisplayClass">
+                                    <b>FollowUp: </b> {this.state.followUp}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-header">
+                                <h3>Diagnosis</h3>
+                            </div>
+                            <div className="card-body">
+                                <div className="patientDisplayClass">
+                                    <b>Status: </b> {this.state.dstatus}
+                                </div>
+                                <div className="patientDisplayClass">
+                                    <b>Diagnosis Name: </b> {this.state.diagnosisName}
+                                </div>
+                                <div className="patientDisplayClass">
+                                    <b>Diagnosis Code: </b> {this.state.diagnosisCode}
+                                </div>
+                                <div className="patientDisplayClass">
+                                    <b>Diagnosis Syatem: </b> {this.state.diagnosisSyatem}
+                                </div>
+                                <div className="patientDisplayClass">
+                                    <b>LastUpdate: </b> {this.state.lastUpdate}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <br/>
-                <br/>
-                <h3>Diagnosis</h3>
-                <div className="patientDisplayClass">
-                    <b>Status: </b> {this.state.dstatus}
-                </div>
-                <div className="patientDisplayClass">
-                    <b>Diagnosis Name: </b> {this.state.diagnosisName}
-                </div>
-                <div className="patientDisplayClass">
-                    <b>Diagnosis Code: </b> {this.state.diagnosisCode}
-                </div>
-                <div className="patientDisplayClass">
-                    <b>Diagnosis Syatem: </b> {this.state.diagnosisSyatem}
-                </div>
-                <div className="patientDisplayClass">
-                    <b>LastUpdate: </b> {this.state.lastUpdate}
-                </div>
-                <br/>
-                <br/>
-                <h3>Feedback</h3>
-                { this.state.feedbackCompleted &&
-                    <div className="patientDisplayClass">
-                        Hi <b>{this.state.patientId}</b>, on a scale of 1-10, would you recommend 
-                        <b> {this.state.doctorId}</b> to a friend or family member?
-                        <br/>
-                        - {this.state.rateDoctor}
+                <div className="row">
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-header">
+                                <h3>Feedback</h3>
+                            </div>
+                            <div className="card-body">
+                                { this.state.feedbackCompleted &&
+                                    <div className="patientDisplayClass">
+                                        <blockquote class="blockquote mb-0">
+                                            Hi <b>{this.state.patientId}</b>, on a scale of 1-10, would you recommend 
+                                            <b> {this.state.doctorId}</b> to a friend or family member?
+                                        </blockquote>
+                                        <br/>
+                                        - {this.state.rateDoctor}
+                                    </div>
+                                }
+                                { this.state.feedbackCompleted &&
+                                    <div className="patientDisplayClass">
+                                        <blockquote class="blockquote mb-0">
+                                            Thank you. You were diagnosed with <b>{this.state.diagnosisName}</b>. Did <b> {this.state.doctorId}</b>
+                                            explain how to manage this diagnosis in a way you could understand?
+                                        </blockquote>
+                                        <br/>
+                                        - {this.state.setDiagnos}
+                                    </div>
+                                }
+                                { this.state.feedbackCompleted &&
+                                    <div className="patientDisplayClass">
+                                        <blockquote class="blockquote mb-0">
+                                            We appreciate the feedback, one last question: how do you feel about being diagnosed
+                                            with <b>{this.state.diagnosisName}</b>?
+                                        </blockquote>
+                                        <br/>
+                                        - {this.state.feedbackValue}
+                                    </div>
+                                }
+                                { !this.state.feedbackCompleted &&
+                                    <div>
+                                        <Link className="submitBtn" to={"/feedback/"+this.state.Id}>Feedback</Link> 
+                                    </div>
+                                }
+                            </div>
+                        </div>
                     </div>
-                }
-                { this.state.feedbackCompleted &&
-                    <div className="patientDisplayClass">
-                        Thank you. You were diagnosed with <b>{this.state.diagnosisName}</b>. Did <b> {this.state.doctorId}</b>
-                        explain how to manage this diagnosis in a way you could understand?
-                        <br/>
-                        - {this.state.setDiagnos}
-                    </div>
-                }
-                { this.state.feedbackCompleted &&
-                    <div className="patientDisplayClass">
-                        We appreciate the feedback, one last question: how do you feel about being diagnosed
-                        with <b>{this.state.diagnosisName}</b>?
-                        <br/>
-                        - {this.state.feedbackValue}
-                    </div>
-                }
-                { !this.state.feedbackCompleted &&
-                    <div>
-                        <Link className="submitBtn" to={"/feedback/"+this.state.Id}>Feedback</Link> 
-                    </div>
-                }
+                </div>
             </div>
         )
     }
